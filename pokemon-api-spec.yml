@@ -1,0 +1,127 @@
+openapi: 3.0.0
+info:
+  title: Pokemon API
+  version: 1.0.0
+paths:
+  /pokemon:
+    get:
+      summary: Get all Pokemon
+      responses:
+        '200':
+          description: A list of all Pokemon
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pokemon'
+    post:
+      summary: Create a new Pokemon
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pokemon'
+      responses:
+        '201':
+          description: The created Pokemon
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pokemon'
+        '400':
+          description: Missing fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /pokemon/{id}/attack-strength:
+    get:
+      summary: Get the attack strength of a Pokemon
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The attack strength of the Pokemon
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  attackStrength:
+                    type: integer
+        '404':
+          description: Pokemon ID not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /pokemon/type/{type}:
+    get:
+      summary: Get Pokemon of a specific type
+      parameters:
+        - name: type
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of Pokemon of the specified type
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pokemon'
+        '404':
+          description: No Pokemon of this type were found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+components:
+  schemas:
+    Pokemon:
+      type: object
+      properties:
+        '#':
+          type: integer
+        Name:
+          type: string
+        'Type 1':
+          type: string
+        'Type 2':
+          type: string
+        Total:
+          type: integer
+        HP:
+          type: integer
+        Attack:
+          type: integer
+        Defense:
+          type: integer
+        'Sp. Atk':
+          type: integer
+        'Sp. Def':
+          type: integer
+        Speed:
+          type: integer
+        Generation:
+          type: integer
+        Legendary:
+          type: boolean
