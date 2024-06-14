@@ -1,6 +1,8 @@
-# Curl a Post request:
+## API Documentation
 
-(base) amm@AnnMarys-MacBook-Pro annalect-takehome % curl -XPOST -H "Content-Type: application/json" -d '{ "Attack": 85,
+#### Curl a Post request example
+
+curl -XPOST -H "Content-Type: application/json" -d '{ "Attack": 85,
     "Defense": 60,
     "Generation": 3,
     "HP": 60,
