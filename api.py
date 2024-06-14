@@ -33,7 +33,7 @@ def create_pokemon():
     pokemon_dataframe = pd.concat([pokemon_dataframe, new_pokemon], ignore_index=True)
 
     # Persist this new data across server restarts
-    pokemon_dataframe.to_csv('PokemonPersist.csv', index=False)
+    # pokemon_dataframe.to_csv('PokemonPersist.csv', index=False)
 
     return jsonify(new_pokemon.to_dict('records')[0]), 201
 
