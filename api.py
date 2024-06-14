@@ -1,5 +1,4 @@
-from flask import Flask, jsonify, abort, request
-import json
+from flask import Flask, jsonify, request
 import pandas as pd
 
 app = Flask(__name__)
@@ -33,7 +32,7 @@ def create_pokemon():
     new_pokemon = pd.DataFrame([dict(data, **{'#': new_id})], columns=['#'] + required_fields)
     pokemon_dataframe = pd.concat([pokemon_dataframe, new_pokemon], ignore_index=True)
 
-    # If you want to persist this new data across server restarts
+    # Persist this new data across server restarts
     pokemon_dataframe.to_csv('PokemonPersist.csv', index=False)
 
     return jsonify(new_pokemon.to_dict('records')[0]), 201
@@ -45,8 +44,6 @@ def get_pokemon_by_type(type):
     if pokemon_of_type.empty:
         return jsonify({"message": "No Pokemon of this type were found"}), 404
     return jsonify(pokemon_of_type.to_dict('records'))
-
-
 
 
 if __name__ == "__main__":
